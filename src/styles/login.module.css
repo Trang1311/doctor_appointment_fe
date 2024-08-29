@@ -1,0 +1,233 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.imageContainer {
+  flex: 1;
+}
+
+.image {
+  width: 100%;
+  height: 470px;
+}
+
+.formContainer {
+  flex: 1;
+  padding: 2rem;
+  max-width: 400px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 80px;
+}
+
+.socialLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.signInText {
+  margin-right: 1rem;
+}
+
+.socialLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.signInText {
+  margin-right: 1rem;
+}
+
+.socialButton {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 18px;  
+  transition: background-color 0.3s ease;
+}
+
+.socialButton:hover {
+  background-color: #005bb5; 
+}
+
+.googleButton {
+  background-color: #4285F4;  
+}
+
+.googleButton:hover {
+  background-color: #357ae8;  
+}
+
+.facebookButton {
+  background-color: #3b5998;  
+}
+
+.facebookButton:hover {
+  background-color: #2d4373;  
+}
+
+
+.socialButton:hover {
+  background-color: #005bb5;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.divider:before,
+.divider:after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.orText {
+  margin: 0 1rem;
+  color: #333;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  margin-right: 5px;
+}
+
+.checkboxLabel {
+  font-size: 14px;
+}
+
+.forgotPassword {
+  font-size: 14px;
+  color: #0070f3;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+.submitContainer {
+  text-align: center;
+}
+
+.submitButton {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 15px 2.5rem;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #005bb5;
+}
+
+.registerText {
+  margin-top: 1rem;
+}
+
+.registerLink {
+  color: #0070f3;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}
+
+.footerBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #0070f3;
+  color: white;
+}
+
+.copyright {
+  margin: 0;
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+}
+
+.socialIcon {
+  color: white;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.socialIcon:hover {
+  color: #eee;
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.inputLabel {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 16px;
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.input:focus ~ .inputLabel,
+.input:not(:placeholder-shown) ~ .inputLabel,
+.input:valid ~ .inputLabel {
+  top: -10px;
+  font-size: 18px;
+  color: #8DBBFA; /* Blue color for focus */
+}
