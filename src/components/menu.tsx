@@ -1,8 +1,8 @@
-// components/menu.tsx
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 interface Topic {
   _id: string;
@@ -17,10 +17,12 @@ const Menu: React.FC = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await axios.get<Topic[]>('http://localhost:3000/topics');
+        const response = await axios.get<Topic[]>(
+          "http://localhost:3000/topics"
+        );
         setTopics(response.data);
       } catch (error) {
-        console.error('Error fetching topics:', error);
+        console.error("Error fetching topics:", error);
       }
     };
 
@@ -40,7 +42,11 @@ const Menu: React.FC = () => {
       {isOpen && (
         <div className="menu">
           {topics.map((topic) => (
-            <div key={topic._id} className="menu-item" onClick={() => handleTopicClick(topic._id)}>
+            <div
+              key={topic._id}
+              className="menu-item"
+              onClick={() => handleTopicClick(topic._id)}
+            >
               {topic.name}
             </div>
           ))}
@@ -58,21 +64,20 @@ const Menu: React.FC = () => {
         .hamburger {
           font-size: 44px;
           padding: 10px 20px;
-          background-color: #8DBBFA;
+          background-color: #8dbbfa;
           color: #fff;
           border: none;
           border-radius: 15px;
           cursor: pointer;
-          font-family: 'Inika', serif;
+          font-family: "Inika", serif;
           transition: background-color 0.3s ease;
-          
         }
         .hamburger-button:hover {
-          background-color: #2F80ED;
+          background-color: #2f80ed;
         }
 
         .menu {
-          background-color:  #D1E9FB ;
+          background-color: #d1e9fb;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           border-radius: 5px;
           padding: 10px;
@@ -83,7 +88,7 @@ const Menu: React.FC = () => {
         .menu-item {
           padding: 10px;
           cursor: pointer;
-          font-family: 'Inika', serif;
+          font-family: "Inika", serif;
         }
 
         .menu-item:hover {

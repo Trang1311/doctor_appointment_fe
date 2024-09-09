@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import Layout from '../components/layout';
-import Menu from '../components/menu';
-import { useAuth } from '../components/withAuth'; // Import authentication context
-import Cookies from 'js-cookie';
+"use client";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Layout from "../components/layout";
+import Menu from "../components/menu";
+import { useAuth } from "../components/withAuth";
+import Cookies from "js-cookie";
 
 interface Doctor {
   _id: string;
@@ -14,6 +15,10 @@ interface Doctor {
   qualifications: string;
   dailySlots: string[];
   topic: string[];
+  clinicAddress: string;
+  phoneNumber: string;
+  contactEmail: string;
+  lifeMotto: string;
 }
 
 const ListDoctor = () => {
@@ -22,28 +27,31 @@ const ListDoctor = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { topicId } = router.query;
-  const { isAuthenticated } = useAuth(); 
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/login');
+      router.push("/login");
       return;
     }
-
     if (topicId) {
       const fetchDoctors = async () => {
         try {
           setLoading(true);
-          const token = Cookies.get('token');
-          const response = await axios.get<Doctor[]>(`http://localhost:3000/topics/${topicId}/doctors`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const token = Cookies.get("token");
+          const response = await axios.get<Doctor[]>(
+            `http://localhost:3000/topics/${topicId}/doctors`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           setDoctors(response.data);
         } catch (error) {
-          console.error('Error fetching doctors:', error);
-          setError('Failed to load doctors.');
+          console.error("Error fetching doctors:", error);
+          setError("Failed to load doctors.");
+          router.push("/login");
         } finally {
           setLoading(false);
         }
@@ -56,7 +64,6 @@ const ListDoctor = () => {
   const handleBookNow = (doctorId: string) => {
     router.push(`/booking?doctorId=${doctorId}`);
   };
-  
 
   if (loading) return <p>Loading...</p>;
 
@@ -66,15 +73,21 @@ const ListDoctor = () => {
         <Menu />
         <div className="container">
           {error && <p className="error">{error}</p>}
-          {doctors.length === 0 && !error && <p>No doctors found for this topic.</p>}
+          {doctors.length === 0 && !error && (
+            <p>No doctors found for this topic.</p>
+          )}
           {doctors.map((doctor) => (
             <div key={doctor._id} className="doctor-card">
-              <img src={`/content/logo/doctor.png`} alt={doctor.name} className="profile-img" />
+              <img
+                src={`/content/logo/doctor.png`}
+                alt={doctor.name}
+                className="profile-img"
+              />
               <div className="doctor-info">
                 <h3>Dr: {doctor.name}</h3>
                 <p>Experience: {doctor.experience} years</p>
-                <button 
-                  className="book-now-button" 
+                <button
+                  className="book-now-button"
                   onClick={() => handleBookNow(doctor._id)}
                 >
                   Book Now
@@ -88,7 +101,7 @@ const ListDoctor = () => {
       <style jsx>{`
         .content-container {
           display: flex;
-          align-items: flex-start; 
+          align-items: flex-start;
           padding: 20px;
         }
 
@@ -97,17 +110,17 @@ const ListDoctor = () => {
           flex-wrap: wrap;
           justify-content: left;
           gap: 30px;
-          font-family: 'Inika', serif;
+          font-family: "Inika", serif;
           margin-left: 250px;
         }
         .doctor-card {
           display: flex;
-          align-items: center; 
+          align-items: center;
           border: 1px solid #ddd;
           border-radius: 8px;
           padding: 20px;
-          width: 300px; 
-          background-color: #8DBBFA;
+          width: 300px;
+          background-color: #8dbbfa;
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -115,11 +128,11 @@ const ListDoctor = () => {
           border-radius: 50%;
           width: 100px;
           height: 100px;
-          margin-right: 20px; 
+          margin-right: 20px;
         }
 
         .doctor-info {
-          flex: 1; 
+          flex: 1;
           text-align: left;
         }
 
@@ -129,13 +142,13 @@ const ListDoctor = () => {
 
         .book-now-button {
           padding: 10px 20px;
-          background-color: #196C17;
+          background-color: #196c17;
           color: #fff;
           border: none;
           border-radius: 5px;
           cursor: pointer;
           font-size: 16px;
-          font-family: 'Inika';
+          font-family: "Inika";
         }
 
         .book-now-button:hover {

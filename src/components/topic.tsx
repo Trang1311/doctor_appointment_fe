@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { useAuth } from '../components/withAuth'; // Import authentication context
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../components/withAuth"; // Import authentication context
 
 interface TopicProps {
   _id: string;
@@ -15,9 +16,7 @@ const Topic: React.FC<TopicProps> = ({ _id, name, description }) => {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      router.push(`/list_doctor?topicId=${_id}`); // Navigate to list_doctor with topicId
-    } else {
-      router.push('/login'); // Redirect to login if not authenticated
+      router.push(`/list_doctor?topicId=${_id}`);
     }
   };
 
@@ -28,7 +27,9 @@ const Topic: React.FC<TopicProps> = ({ _id, name, description }) => {
       onMouseLeave={() => setShowDescription(false)}
       onClick={handleClick}
     >
-      <div className="icon"><img src="/content/logo/lotus.png" alt="Icon" /></div>
+      <div className="icon">
+        <img src="/content/logo/lotus.png" alt="Icon" />
+      </div>
       <h3>{name}</h3>
       {showDescription && (
         <div className="description">
@@ -42,17 +43,17 @@ const Topic: React.FC<TopicProps> = ({ _id, name, description }) => {
           flex: 1 0 calc(20% - 50px);
           max-width: calc(20% - 50px);
           box-sizing: border-box;
-          background-color: #D1E9FB;
+          background-color: #d1e9fb;
           padding: 20px;
           text-align: center;
           border-radius: 8px;
           transition: background-color 0.3s ease;
           cursor: pointer;
-          font-family:'Inika','serif';
+          font-family: "Inika", "serif";
           font-size: 18px;
         }
         .item:hover {
-          background-color: #8DBBFA;
+          background-color: #8dbbfa;
         }
 
         .icon {
@@ -82,7 +83,7 @@ const Topic: React.FC<TopicProps> = ({ _id, name, description }) => {
         }
 
         .description::after {
-          content: '';
+          content: "";
           position: absolute;
           top: 100%;
           left: 50%;
