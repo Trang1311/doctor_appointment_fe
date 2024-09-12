@@ -124,7 +124,7 @@ const HarmonyZone = () => {
         <style jsx>{`
           .harmony-zone {
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: Georgia, "Times New Roman", Times, serif;
             margin: 0 auto;
           }
           .sounds-container {

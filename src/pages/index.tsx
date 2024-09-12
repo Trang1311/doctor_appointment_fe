@@ -1,14 +1,14 @@
-import Layout from '../components/layout';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Topic from '../components/topic';
-import Advertisement from '../components/advertisement';
-
+import Layout from "../components/layout";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Topic from "../components/topic";
+import Advertisement from "../components/advertisement";
 
 interface TopicData {
   _id: string;
   name: string;
   description?: string;
+  img: string;
 }
 
 const Index = () => {
@@ -17,10 +17,12 @@ const Index = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await axios.get<TopicData[]>('http://localhost:3000/topics');
+        const response = await axios.get<TopicData[]>(
+          "http://localhost:3000/topics"
+        );
         setTopics(response.data);
       } catch (error) {
-        console.error('Error fetching topics:', error);
+        console.error("Error fetching topics:", error);
       }
     };
 
@@ -33,10 +35,16 @@ const Index = () => {
       <div className="container">
         <h2 className="page-title">
           Choose doctor's <span className="highlight">Expertise</span>
-        </h2>  
+        </h2>
         <div className="topics-list">
           {topics.map((topic) => (
-            <Topic key={topic._id} _id={topic._id} name={topic.name} description={topic.description} />
+            <Topic
+              key={topic._id}
+              _id={topic._id}
+              name={topic.name}
+              description={topic.description}
+              img={topic.img}
+            />
           ))}
         </div>
       </div>
@@ -44,7 +52,7 @@ const Index = () => {
       <style jsx>{`
         .container {
           text-align: center;
-          font-family: 'Aclonica', serif;
+          font-family: "Aclonica", serif;
           padding: 20px;
         }
 
@@ -57,7 +65,7 @@ const Index = () => {
 
         .highlight {
           font-weight: bold;
-          font-family: 'Aclonica', serif;
+          font-family: "Aclonica", serif;
           color: #0070f3;
         }
 
@@ -66,7 +74,7 @@ const Index = () => {
           flex-wrap: wrap;
           justify-content: center;
           gap: 10px;
-          font-family: 'Inika';
+          font-family: "Inika";
         }
       `}</style>
     </Layout>

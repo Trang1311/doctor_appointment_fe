@@ -14,8 +14,8 @@ const SoundCategory: React.FC<SoundCategoryProps> = ({ sounds }) => {
   const audioRefs = useRef<HTMLAudioElement[]>([]);
 
   const categories: { [key: string]: string[] } = {
-    relax: ["rain", "forest", "waves", "birds"],
-    noiseBlocker: ["white", "vacum"],
+    relax: ["chime", "forest", "river", "birds"],
+    noiseBlocker: ["white", "rain"],
     motivation: ["train", "snow"],
     productivity: ["bell", "waves"],
   };
@@ -56,11 +56,9 @@ const SoundCategory: React.FC<SoundCategoryProps> = ({ sounds }) => {
     });
   };
 
-  // Explicitly typing selectedSounds array
   const playRandomSound = () => {
-    const numSoundsToPlay = Math.floor(Math.random() * sounds.length) + 1; // Choose how many sounds to play (1 to all sounds)
+    const numSoundsToPlay = Math.floor(Math.random() * sounds.length) + 1;
 
-    // Explicitly typing as an array of sound objects
     const selectedSounds: (typeof sounds)[0][] = [];
 
     while (selectedSounds.length < numSoundsToPlay) {
@@ -70,7 +68,6 @@ const SoundCategory: React.FC<SoundCategoryProps> = ({ sounds }) => {
       }
     }
 
-    // Pause all sounds first
     audioRefs.current.forEach((audio) => audio.pause());
 
     setCurrentCategory("random");
@@ -125,7 +122,7 @@ const SoundCategory: React.FC<SoundCategoryProps> = ({ sounds }) => {
           padding: 10px 20px;
           width: 225px;
           height: 130px;
-          font-family: "Roboto";
+          font-family: Georgia, "Times New Roman", Times, serif;
           font-size: 28px;
           font-weight: bold;
           cursor: pointer;

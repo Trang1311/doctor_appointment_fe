@@ -7,9 +7,10 @@ interface TopicProps {
   _id: string;
   name: string;
   description?: string;
+  img: string;
 }
 
-const Topic: React.FC<TopicProps> = ({ _id, name, description }) => {
+const Topic: React.FC<TopicProps> = ({ _id, name, description, img }) => {
   const [showDescription, setShowDescription] = useState(false);
   const router = useRouter();
   const { isAuthenticated } = useAuth(); // Use authentication context
@@ -28,7 +29,7 @@ const Topic: React.FC<TopicProps> = ({ _id, name, description }) => {
       onClick={handleClick}
     >
       <div className="icon">
-        <img src="/content/logo/lotus.png" alt="Icon" />
+        <img src={img} alt="Icon" />
       </div>
       <h3>{name}</h3>
       {showDescription && (

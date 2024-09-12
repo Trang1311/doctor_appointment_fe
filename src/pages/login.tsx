@@ -1,27 +1,27 @@
-import { useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
-import styles from '../styles/login.module.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import styles from "../styles/login.module.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
+      const response = await axios.post("http://localhost:3000/auth/login", {
         username,
         password,
       });
-      Cookies.set('token', response.data.access_token);
-      Cookies.set('username', username);
+      Cookies.set("token", response.data.access_token);
+      Cookies.set("username", username);
 
-      router.push( '/');
+      router.push("/");
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
     }
   };
 
@@ -30,7 +30,7 @@ const Login = () => {
       <div className={styles.row}>
         <div className={styles.imageContainer}>
           <img
-            src="content/logo/DisplayFileFormFileName.png"
+            src="/content/logo/landing.jpg"
             className={styles.image}
             alt="Login"
           />
@@ -39,10 +39,16 @@ const Login = () => {
           <form>
             <div className={styles.socialLogin}>
               <p className={styles.signInText}>Sign in with</p>
-              <button type="button" className={`${styles.socialButton} ${styles.facebookButton}`}>
+              <button
+                type="button"
+                className={`${styles.socialButton} ${styles.facebookButton}`}
+              >
                 <i className="fab fa-facebook-f"></i>
               </button>
-              <button type="button" className={`${styles.socialButton} ${styles.googleButton}`}>
+              <button
+                type="button"
+                className={`${styles.socialButton} ${styles.googleButton}`}
+              >
                 <i className="fab fa-google"></i>
               </button>
             </div>
@@ -75,7 +81,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <label htmlFor="password" className={styles.inputLabel}>Password </label>
+              <label htmlFor="password" className={styles.inputLabel}>
+                Password{" "}
+              </label>
             </div>
 
             <div className={styles.footer}>
@@ -89,7 +97,9 @@ const Login = () => {
                   Remember me
                 </label>
               </div>
-              <a href="#!" className={styles.forgotPassword}>Forgot password?</a>
+              <a href="#!" className={styles.forgotPassword}>
+                Forgot password?
+              </a>
             </div>
 
             <div className={styles.submitContainer}>
@@ -101,7 +111,10 @@ const Login = () => {
                 Login
               </button>
               <p className={styles.registerText}>
-                Don't have an account? <a href="#!" className={styles.registerLink}>Register</a>
+                Don't have an account?{" "}
+                <a href="/register" className={styles.registerLink}>
+                  Register
+                </a>
               </p>
             </div>
           </form>
