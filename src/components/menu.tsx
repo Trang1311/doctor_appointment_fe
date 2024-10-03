@@ -7,10 +7,10 @@ import { useRouter } from "next/router";
 interface Topic {
   _id: string;
   name: string;
+  img: string;
 }
 
 const Menu: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [topics, setTopics] = useState<Topic[]>([]);
   const router = useRouter();
 
@@ -31,15 +31,11 @@ const Menu: React.FC = () => {
 
   const handleTopicClick = (topicId: string) => {
     router.push(`/list_doctor?topicId=${topicId}`);
-    setIsOpen(false);
   };
 
   return (
-    <div className="menu-container">
-      <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-        ☰
-      </button>
-      {isOpen && (
+    <div>
+      <div className="drawer">
         <div className="menu">
           {topics.map((topic) => (
             <div
@@ -47,52 +43,43 @@ const Menu: React.FC = () => {
               className="menu-item"
               onClick={() => handleTopicClick(topic._id)}
             >
+              <img src={topic.img} alt={topic.name} className="topic-icon" />
               {topic.name}
             </div>
           ))}
         </div>
-      )}
+      </div>
 
       <style jsx>{`
-        .menu-container {
+        .drawer {
+          width: 250px;
+          background-color: #fff;
+          height: calc(100vh - 65px);
+          overflow-y: auto;
+          padding: 15px;
           position: fixed;
-          top: 110px;
-          left: 20px;
-          z-index: 1100;
-        }
-
-        .hamburger {
-          font-size: 44px;
-          padding: 10px 20px;
-          background-color: #8dbbfa;
-          color: #fff;
-          border: none;
-          border-radius: 15px;
-          cursor: pointer;
-          font-family: "Inika", serif;
-          transition: background-color 0.3s ease;
-        }
-        .hamburger-button:hover {
-          background-color: #2f80ed;
-        }
-
-        .menu {
-          background-color: #d1e9fb;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          border-radius: 5px;
-          padding: 10px;
-          margin-top: 10px;
-          width: 200px;
         }
 
         .menu-item {
-          padding: 10px;
+          display: flex;
+          align-items: center;
+          padding: 15px;
           cursor: pointer;
-          font-family: "Inika", serif;
+          font-family: Georgia, "Times New Roman", Times, serif;
+          font-size: 16px;
+          color: #464141;
+          line-height: 2;
+          white-space: normal;
         }
 
         .menu-item:hover {
-          background-color: #e0e0e0;
+          background-color: #8dbbfa;
+        }
+
+        .topic-icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 10px;
         }
       `}</style>
     </div>

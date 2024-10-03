@@ -1,5 +1,4 @@
 import Layout from "@/components/layout";
-import SoundPlayer from "../components/SoundPlayer";
 import SoundCategory from "../components/SoundCategory";
 
 const HarmonyZone = () => {
@@ -110,29 +109,20 @@ const HarmonyZone = () => {
     <Layout>
       <div className="harmony-zone">
         <SoundCategory sounds={sounds} />
-        <div className="sounds-container">
-          {sounds.map((sound, index) => (
-            <SoundPlayer
-              key={sound.name}
-              soundName={sound.name}
-              label={sound.label}
-              soundUrl={sound.url}
-            />
-          ))}
-        </div>
-
+        <div className="sounds-container"></div>
         <style jsx>{`
           .harmony-zone {
+            background-image: url("/content/logo/hand-painted-watercolor-pastel-sky-cloud-background_41066-1919.jpg");
+            background-size: cover;
+            background-position: center;
             text-align: center;
             font-family: Georgia, "Times New Roman", Times, serif;
             margin: 0 auto;
-          }
-          .sounds-container {
-            display: grid;
-            grid-template-columns: repeat(4, 213px);
-            gap: 40px;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            margin-top: 60px;
           }
         `}</style>
       </div>

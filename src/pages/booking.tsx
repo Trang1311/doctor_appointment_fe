@@ -24,8 +24,9 @@ interface Doctor {
   topic: string[];
   clinicAddress: string;
   phoneNumber: string;
-  contactEmail: string;
+  email: string;
   lifeMotto: string;
+  imageURL: string;
 }
 
 const Booking = () => {
@@ -96,8 +97,9 @@ const Booking = () => {
       await axios.post(
         "http://localhost:3000/appointments",
         {
+          userid: Cookies.get("userId"),
           doctorname: doctor?.name,
-          doctor: doctor?._id,
+          doctorid: doctor?._id,
           username: Cookies.get("username"),
           topic: doctor?.topic?.[0],
           date: selectedDate,
@@ -111,7 +113,6 @@ const Booking = () => {
           },
         }
       );
-
       setNotificationType("success");
       setNotification(
         "Thank you for your appointment. Please check your email for confirmation."
@@ -150,7 +151,7 @@ const Booking = () => {
           <div className="cards-container">
             <div className="card doctor-info">
               <img
-                src={`/content/logo/doctor.png`}
+                src={doctor.imageURL || `/content/logo/doctor.png`}
                 alt={doctor.name}
                 className="profile-img"
               />
@@ -169,7 +170,7 @@ const Booking = () => {
                   <strong>Phone Number:</strong> {doctor.phoneNumber}
                 </p>
                 <p>
-                  <strong>Contact Email:</strong> {doctor.contactEmail}
+                  <strong>Email:</strong> {doctor.email}
                 </p>
                 <p>
                   <strong>Life Motto:</strong> {doctor.lifeMotto}
@@ -220,36 +221,43 @@ const Booking = () => {
         )}
         <style jsx>{`
           .booking-container {
-            padding: 10px;
-            font-family: "Inika", serif;
-            font-size: 24px;
+            padding: 100px;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 18px;
+            background-color: #004574;
+            background-size: cover;
+            justify-content: center;
+            margin-top: 30px;
+            width: calc(100% - 150px);
           }
 
           .cards-container {
             display: flex;
             justify-content: space-between;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             gap: 20px;
+            background-color: #004574;
           }
 
           .card {
             flex: 1;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+            background-color: #ffff;
           }
 
           .doctor-info {
             display: flex;
             align-items: flex-start;
+            font-size: 16px;
           }
 
           .profile-img {
             border-radius: 50%;
-            width: 155px;
-            height: 150px;
+            width: 90px;
+            height: 90px;
             margin-right: 20px;
             object-fit: cover;
           }
@@ -259,8 +267,8 @@ const Booking = () => {
           }
 
           .info h2 {
-            color: #8dbbfa;
-            font-size: 32px;
+            color: #004574;
+            font-size: 18px;
             margin-bottom: 10px;
           }
 
@@ -275,8 +283,8 @@ const Booking = () => {
           }
 
           .booking-form h2 {
-            color: #8dbbfa;
-            font-size: 32px;
+            color: #004574;
+            font-size: 16px;
             margin-bottom: 10px;
           }
 
@@ -292,8 +300,9 @@ const Booking = () => {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
-            font-size: 16px;
-            box-sizing: border-box; /* Ensure padding does not affect width */
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: Georgia, "Times New Roman", Times, serif;
           }
 
           .button-container {
@@ -304,17 +313,20 @@ const Booking = () => {
 
           .booking-form button {
             padding: 10px 20px;
-            background-color: #8dbbfa;
+            background-color: #004574;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 28px;
-            font-family: "Inika", serif;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", Times, serif;
           }
 
           .booking-form button:hover {
             background-color: #005bb5;
+          }
+          .card booking-form {
+            font-size: 16px;
           }
         `}</style>
       </div>

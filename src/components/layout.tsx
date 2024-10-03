@@ -1,25 +1,32 @@
-import React, { ReactNode } from 'react';
-import Header from './header';
+import React, { ReactNode } from "react";
+import Header from "./header";
+import Footer from "./footer";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const headerHeight = 80; // Adjust this value to match the height of your header
-
   return (
-    <div>
+    <div className="layout">
       <Header />
-      <div className="container">{children}</div>
+      <div className="main-content">{children}</div>
+      <Footer />
       <style jsx>{`
-        .container {
-          padding-top: ${headerHeight}px; /* Ensure content is below the fixed header */
-          font-family: 'Inika', serif;
+        .layout {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          position: relative;
+        }
+        .main-content {
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+          padding-top: 40px;
         }
       `}</style>
     </div>
   );
 };
-
 export default Layout;

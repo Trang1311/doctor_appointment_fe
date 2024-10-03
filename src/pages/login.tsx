@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -9,7 +9,6 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-
   const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3000/auth/login", {
@@ -17,13 +16,65 @@ const Login = () => {
         password,
       });
       Cookies.set("token", response.data.access_token);
-      Cookies.set("username", username);
-
+      Cookies.set("username", response.data.user.username);
+      Cookies.set("role", response.data.user.role);
+      Cookies.set("userId", response.data.user._id);
       router.push("/");
     } catch (error) {
       console.error("Login error:", error);
     }
   };
+
+  const handleGoogleLogin = (response: any) => {
+    console.log("Google login response:", response);
+    if (response && response.credential) {
+      axios
+        .post("http://localhost:3000/auth/login/google", {
+          tokenId: response.credential,
+        })
+        .then((res) => {
+          Cookies.set("token", res.data.access_token);
+          Cookies.set("username", res.data.user.username);
+          Cookies.set("role", res.data.user.role);
+          Cookies.set("userId", res.data.user._id);
+          router.push("/");
+        })
+        .catch((error) => {
+          console.error("Google login error:", error);
+        });
+    } else {
+      console.error("Google login response error:", response);
+    }
+  };
+
+  useEffect(() => {
+    if (window.google && window.google.accounts) {
+      window.google.accounts.id.initialize({
+        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
+        callback: handleGoogleLogin,
+      });
+      window.google.accounts.id.renderButton(
+        document.getElementById("googleSignInButton")!,
+        { theme: "outline", size: "large" }
+      );
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.onload = () => {
+        if (window.google && window.google.accounts) {
+          window.google.accounts.id.initialize({
+            client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
+            callback: handleGoogleLogin,
+          });
+          window.google.accounts.id.renderButton(
+            document.getElementById("googleSignInButton")!,
+            { theme: "outline", size: "large" }
+          );
+        }
+      };
+      document.body.appendChild(script);
+    }
+  }, []);
 
   return (
     <section className={styles.container}>
@@ -39,18 +90,12 @@ const Login = () => {
           <form>
             <div className={styles.socialLogin}>
               <p className={styles.signInText}>Sign in with</p>
-              <button
-                type="button"
-                className={`${styles.socialButton} ${styles.facebookButton}`}
-              >
-                <i className="fab fa-facebook-f"></i>
-              </button>
-              <button
-                type="button"
+              <div
+                id="googleSignInButton"
                 className={`${styles.socialButton} ${styles.googleButton}`}
               >
-                <i className="fab fa-google"></i>
-              </button>
+                <i className="fab fa-google"></i> Google
+              </div>
             </div>
 
             <div className={styles.divider}>
@@ -82,7 +127,7 @@ const Login = () => {
                 required
               />
               <label htmlFor="password" className={styles.inputLabel}>
-                Password{" "}
+                Password
               </label>
             </div>
 

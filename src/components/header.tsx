@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faCompass,
+  faInfoCircle,
+  faSpa,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header: React.FC = () => {
   const router = useRouter();
@@ -23,6 +30,11 @@ const Header: React.FC = () => {
     router.push("/");
   };
 
+  const handleDashboardClick = () => {
+    const userRole = Cookies.get("role");
+    router.push(`/dashboard?role=${userRole}`);
+  };
+
   return (
     <header className="header">
       <div className="logo">
@@ -34,23 +46,32 @@ const Header: React.FC = () => {
       </div>
       <nav className="nav-links">
         <Link href="/" legacyBehavior>
-          <a className={router.pathname === "/" ? "active" : ""}>Home</a>
+          <a className={router.pathname === "/" ? "active" : ""}>
+            <FontAwesomeIcon icon={faHome} style={{ marginRight: "10px" }} />
+            Home
+          </a>
         </Link>
         <Link href="/explore" legacyBehavior>
           <a className={router.pathname === "/explore" ? "active" : ""}>
+            <FontAwesomeIcon icon={faCompass} style={{ marginRight: "10px" }} />
             Explore
           </a>
         </Link>
         <Link href="/about" legacyBehavior>
           <a className={router.pathname === "/about" ? "active" : ""}>
+            <FontAwesomeIcon
+              icon={faInfoCircle}
+              style={{ marginRight: "10px" }}
+            />
             About Us
           </a>
         </Link>
         <Link href="/harmony-zone" legacyBehavior>
           <a className={router.pathname === "/harmony-zone" ? "active" : ""}>
+            <FontAwesomeIcon icon={faSpa} style={{ marginRight: "10px" }} />
             <span className="harmony-zone">
-              <span className="harmony">Harmony</span>
-              <span className="zone">Zone</span>
+              <span className="harmony reveal-text">Harmony</span>
+              <span className="zone reveal-text">Zone</span>
             </span>
           </a>
         </Link>
@@ -59,7 +80,17 @@ const Header: React.FC = () => {
         {username ? (
           <div className="user-info">
             <Link href="/dashboard" legacyBehavior>
-              <span className="welcome-message">Hello, {username}</span>
+              <a
+                className={router.pathname === "/dashboard" ? "active" : ""}
+                style={{ textDecoration: "none" }}
+              >
+                <span
+                  className="welcome-message"
+                  onClick={handleDashboardClick}
+                >
+                  Hello, {username}
+                </span>
+              </a>
             </Link>
             <img
               src="content/logo/user-logout.png"
@@ -87,7 +118,7 @@ const Header: React.FC = () => {
           align-items: center;
           justify-content: space-between;
           padding: 15px 30px;
-          background-color: #d1e9fb;
+          background-color: #fff;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           z-index: 1000;
           box-sizing: border-box;
@@ -128,12 +159,14 @@ const Header: React.FC = () => {
 
         .nav-links :global(a) {
           text-decoration: none;
-          color: #808080;
+          color: #464141;
           font-family: Georgia, "Times New Roman", Times, serif;
-          font-size: 24px;
+          font-size: 18px;
           padding: 15px 25px;
           border-radius: 8px;
           transition: background-color 0.3s ease, color 0.3s ease;
+          display: flex;
+          align-items: center;
         }
 
         .nav-links :global(a.active),
@@ -150,7 +183,7 @@ const Header: React.FC = () => {
           border-radius: 8px;
           cursor: pointer;
           font-family: Georgia, "Times New Roman", Times, serif;
-          font-size: 20px;
+          font-size: 18px;
           transition: background-color 0.3s ease;
         }
 
@@ -170,13 +203,19 @@ const Header: React.FC = () => {
 
         .welcome-message {
           font-family: Georgia, "Times New Roman", Times, serif;
-          font-size: 20px;
-          color: #808080;
+          font-size: 18px;
+          color: #464141;
           margin-right: 10px;
+          text-decoration: none;
+        }
+        .welcome-message:hover {
+          filter: brightness(0.8);
+          color: #8dbbfa;
+          text-decoration: none;
         }
 
         .logout-icon {
-          height: 40px;
+          height: 30px;
           cursor: pointer;
           transition: filter 0.3s ease, box-shadow 0.3s ease;
         }
@@ -191,16 +230,20 @@ const Header: React.FC = () => {
           align-items: center;
         }
 
+        .reveal-text {
+          position: relative;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
         .harmony {
           color: #c82b2b;
           font-weight: bold;
-          text-shadow: 3px 3px 9px rgba(0, 0, 0, 0.3);
         }
 
         .zone {
           color: #2f80ed;
           font-weight: bold;
-          text-shadow: 3px 3px 9px rgba(0, 0, 0, 0.3);
         }
       `}</style>
     </header>

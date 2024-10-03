@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Topic from "../components/topic";
 import Advertisement from "../components/advertisement";
+import { io } from "socket.io-client";
 
 interface TopicData {
   _id: string;
@@ -11,8 +12,12 @@ interface TopicData {
   img: string;
 }
 
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL!, {
+  transports: ["websocket"],
+});
 const Index = () => {
   const [topics, setTopics] = useState<TopicData[]>([]);
+  const [clientIp, setClientIp] = useState<string>("");
 
   useEffect(() => {
     const fetchTopics = async () => {
@@ -27,46 +32,60 @@ const Index = () => {
     };
 
     fetchTopics();
+    socket.on("clientIp", (ip: string) => {
+      setClientIp(ip);
+    });
+
+    return () => {
+      socket.off("clientIp");
+    };
   }, []);
 
   return (
     <Layout>
-      <Advertisement />
-      <div className="container">
-        <h2 className="page-title">
-          Choose doctor's <span className="highlight">Expertise</span>
-        </h2>
-        <div className="topics-list">
-          {topics.map((topic) => (
-            <Topic
-              key={topic._id}
-              _id={topic._id}
-              name={topic.name}
-              description={topic.description}
-              img={topic.img}
-            />
-          ))}
+      <div className="ad-container">
+        <Advertisement />
+
+        <div className="container">
+          <h2 className="page-title">
+            Choose doctor's <span className="highlight">Expertise</span>
+          </h2>
+          <div className="topics-list">
+            {topics.map((topic) => (
+              <Topic
+                key={topic._id}
+                _id={topic._id}
+                name={topic.name}
+                description={topic.description}
+                img={topic.img}
+              />
+            ))}
+          </div>
         </div>
       </div>
-
       <style jsx>{`
+        .ad-container {
+          padding-top: 40px;
+          background-color: #004574;
+        }
         .container {
           text-align: center;
-          font-family: "Aclonica", serif;
+          font-family: Georgia, "Times New Roman", Times, serif;
           padding: 20px;
+          background-color: #004574;
         }
 
         .page-title {
-          font-size: 50px;
+          font-size: 38px;
           margin-bottom: 20px;
-          color: #333;
+          color: #fff;
           font-weight: light;
         }
 
         .highlight {
           font-weight: bold;
           font-family: "Aclonica", serif;
-          color: #0070f3;
+          color: yellow;
         }
 
         .topics-list {
@@ -74,7 +93,8 @@ const Index = () => {
           flex-wrap: wrap;
           justify-content: center;
           gap: 10px;
-          font-family: "Inika";
+          font-family: Georgia, "Times New Roman", Times, serif;
+          margin-bottom: 30px;
         }
       `}</style>
     </Layout>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useAuth } from "../components/withAuth"; // Import authentication context
+import { useAuth } from "../components/withAuth";
 
 interface TopicProps {
   _id: string;
@@ -13,7 +13,7 @@ interface TopicProps {
 const Topic: React.FC<TopicProps> = ({ _id, name, description, img }) => {
   const [showDescription, setShowDescription] = useState(false);
   const router = useRouter();
-  const { isAuthenticated } = useAuth(); // Use authentication context
+  const { isAuthenticated } = useAuth();
 
   const handleClick = () => {
     if (isAuthenticated) {
@@ -44,17 +44,18 @@ const Topic: React.FC<TopicProps> = ({ _id, name, description, img }) => {
           flex: 1 0 calc(20% - 50px);
           max-width: calc(20% - 50px);
           box-sizing: border-box;
-          background-color: #d1e9fb;
-          padding: 20px;
+          background-color: #fff;
+          padding: 10px;
           text-align: center;
           border-radius: 8px;
           transition: background-color 0.3s ease;
           cursor: pointer;
-          font-family: "Inika", "serif";
-          font-size: 18px;
+          font-family: Georgia, "Times New Roman", Times, serif;
+          font-size: 14px;
+          color: #464141;
         }
         .item:hover {
-          background-color: #8dbbfa;
+          background-color: #5482cb;
         }
 
         .icon {
@@ -78,7 +79,7 @@ const Topic: React.FC<TopicProps> = ({ _id, name, description, img }) => {
           color: #fff;
           padding: 5px 10px;
           border-radius: 8px;
-          font-size: 18px;
+          font-size: 16px;
           z-index: 10;
           pointer-events: none;
         }

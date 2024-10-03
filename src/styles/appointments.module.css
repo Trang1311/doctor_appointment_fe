@@ -1,0 +1,179 @@
+.mainContainer {
+  padding-top: -10px;
+  margin-left: 250px;
+  font-size: 16px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+}
+.buttonContainer button {
+  background-color: #8dbbfa;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+}
+
+.buttonContainer button:hover {
+  background-color: #c82b2b;
+}
+
+.weekView {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  font-size: 16px;
+  background-image: url("/content/logo/hand-painted-watercolor-pastel-sky-cloud-background_41066-1919.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.weekNavigation {
+  display: flex;
+  align-items: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.weekNavigation button {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+  color: #ffff;
+  background-color: #8dbbfa;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 0 10px;
+}
+
+.weekNavigation button:hover {
+  background-color: #c82b2b;
+}
+
+.monthNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.monthNavigation button {
+  padding: 10px 15px;
+  margin: 0 10px;
+}
+
+.header {
+  display: flex;
+  font-size: 16px;
+}
+
+.timeHeader {
+  width: 120px;
+  border: 1px solid #ccc;
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+      to bottom left,
+      transparent 49.5%,
+      #00ddff 49.5%,
+      #ff3f3f 50.5%,
+      transparent 50.5%
+    ),
+    #8dbbfa;
+  height: 60px;
+  font-size: 16px;
+}
+.dateText {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  top: 10px;
+  left: 20px;
+  font-size: 16px;
+}
+
+.timeText {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  bottom: 5px;
+  right: 10px;
+  font-size: 16px;
+}
+
+.dayHeader {
+  flex: 1;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+  padding: 5px 0;
+  border: 1px solid #ccc;
+  background-color: #8dbbfa;
+  height: 50px;
+}
+
+.dayHeader div {
+  margin: 2px 0;
+}
+
+.slotsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+}
+
+.timeLabel {
+  width: 100px;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: rgb(47, 57, 164);
+}
+
+.timeSlotWrapper {
+  flex: 1;
+  font-size: 16px;
+}
+
+.timeSlot {
+  height: 60px;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.hasAppointment {
+  background-color: #c82b2b;
+  color: white;
+}
+
+.hasAppointment:hover {
+  opacity: 0.8;
+}
