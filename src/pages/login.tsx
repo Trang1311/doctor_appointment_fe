@@ -1,22 +1,28 @@
+"use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import styles from "../styles/login.module.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import Link from "next/link";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
+        {
+          username,
+          password,
+        }
+      );
       Cookies.set("token", response.data.access_token);
       Cookies.set("username", response.data.user.username);
+      Cookies.set("email", response.data.user.email);
+      Cookies.set("imageURL", response.data.user.imageURL);
       Cookies.set("role", response.data.user.role);
       Cookies.set("userId", response.data.user._id);
       router.push("/");
@@ -35,6 +41,8 @@ const Login = () => {
         .then((res) => {
           Cookies.set("token", res.data.access_token);
           Cookies.set("username", res.data.user.username);
+          Cookies.set("email", res.data.user.email);
+          Cookies.set("imageURL", res.data.user.imageURL);
           Cookies.set("role", res.data.user.role);
           Cookies.set("userId", res.data.user._id);
           router.push("/");
@@ -77,93 +85,84 @@ const Login = () => {
   }, []);
 
   return (
-    <section className={styles.container}>
-      <div className={styles.row}>
-        <div className={styles.imageContainer}>
-          <img
-            src="/content/logo/landing.jpg"
-            className={styles.image}
-            alt="Login"
+    <section className="relative flex items-center justify-center min-h-screen overflow-hidden">
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+      >
+        <source src="/content/panel/BG.mp4" type="video/mp4" />
+      </video>
+      <div className="relative bg-white rounded-lg shadow-lg p-8 max-w-md w-full bg-opacity-80">
+        <h1
+          className="text-3xl font-bold text-center mb-6"
+          style={{ color: "#3474ff" }}
+        >
+          ĐĂNG NHẬP
+        </h1>
+        <div className="flex items-center justify-center mb-4">
+          <div
+            id="googleSignInButton"
+            className="flex items-center justify-center w-full bg-white border border-gray-300 rounded-lg shadow-md py-2 hover:bg-gray-100 cursor-pointer transition"
+          >
+            <i className="fab fa-google text-red-500 mr-2"></i>
+            <span className="text-gray-700 font-semibold">
+              Đăng Nhập với Google
+            </span>
+          </div>
+        </div>
+        <div className="text-center mb-4">
+          <span className="text-gray-500">Hoặc</span>
+        </div>
+        <div className="mb-4">
+          <input
+            type="text"
+            id="username"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Tên Đăng Nhập"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
-        <div className={styles.formContainer}>
-          <form>
-            <div className={styles.socialLogin}>
-              <p className={styles.signInText}>Sign in with</p>
-              <div
-                id="googleSignInButton"
-                className={`${styles.socialButton} ${styles.googleButton}`}
-              >
-                <i className="fab fa-google"></i> Google
-              </div>
-            </div>
-
-            <div className={styles.divider}>
-              <p className={styles.orText}>Or</p>
-            </div>
-
-            <div className={styles.inputGroup}>
-              <input
-                type="text"
-                id="username"
-                className={styles.input}
-                placeholder=" "
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <label htmlFor="username" className={styles.inputLabel}>
-                Username
-              </label>
-            </div>
-            <div className={styles.inputGroup}>
-              <input
-                type="password"
-                id="password"
-                className={styles.input}
-                placeholder=" "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <label htmlFor="password" className={styles.inputLabel}>
-                Password
-              </label>
-            </div>
-
-            <div className={styles.footer}>
-              <div className={styles.checkboxGroup}>
-                <input
-                  className={styles.checkbox}
-                  type="checkbox"
-                  id="rememberMe"
-                />
-                <label htmlFor="rememberMe" className={styles.checkboxLabel}>
-                  Remember me
-                </label>
-              </div>
-              <a href="#!" className={styles.forgotPassword}>
-                Forgot password?
-              </a>
-            </div>
-
-            <div className={styles.submitContainer}>
-              <button
-                type="button"
-                className={styles.submitButton}
-                onClick={handleLogin}
-              >
-                Login
-              </button>
-              <p className={styles.registerText}>
-                Don't have an account?{" "}
-                <a href="/register" className={styles.registerLink}>
-                  Register
-                </a>
-              </p>
-            </div>
-          </form>
+        <div className="mb-4">
+          <input
+            type="password"
+            id="password"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Mật Khẩu"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex items-center">
+            <input className="mr-2" type="checkbox" id="rememberMe" />
+            <label htmlFor="rememberMe" className="text-gray-600">
+              Ghi nhớ
+            </label>
+          </div>
+          <a href="#!" className="text-blue-600 hover:underline">
+            Quên mật khẩu?
+          </a>
+        </div>
+        <button
+          type="button"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          onClick={handleLogin}
+        >
+          Đăng Nhập
+        </button>
+        <p className="mt-4 text-center text-gray-600">
+          Không có tài khoản?{" "}
+          <Link href="/register" passHref>
+            <span className="text-blue-600 hover:underline cursor-pointer">
+              Đăng Ký Ngay
+            </span>
+          </Link>
+        </p>
       </div>
     </section>
   );

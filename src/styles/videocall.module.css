@@ -1,0 +1,20 @@
+.videoCallModal {
+  overflow-y: auto;
+  height: 500px;
+}
+.myVideo,
+.peerVideo {
+  width: 100%;
+  height: 100%;
+}
+.endCallButton {
+  font-size: 28px;
+  color: red;
+  border: 0cap;
+  background: none;
+  transform: translateY(-1050%);
+  margin-left: 420px;
+}
+.endCallButton:hover {
+  color: darkred;
+}

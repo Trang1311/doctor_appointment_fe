@@ -1,0 +1,149 @@
+.chatcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+  max-width: 100%;
+  height: 700px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: #fff;
+  font-family: "Roboto", serif;
+  position: relative; /* Để nút video call định vị tương đối */
+}
+
+.chatcontainer h1 {
+  text-align: center;
+  margin-bottom: 0px;
+  font-size: 18px;
+  color: #015ced;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  border-radius: 15px 15px 0px 0px;
+  padding: 20px;
+  margin-top: 0px;
+  position: relative;
+}
+
+.videoIcon {
+  color: #015ced;
+  position: absolute; /* Định vị nút video call */
+  top: 25px; /* Khoảng cách từ trên khung chat */
+  right: 40px; /* Khoảng cách từ bên trái khung chat */
+  cursor: pointer;
+}
+
+.videoIcon:hover {
+  color: #000000;
+}
+
+.noti {
+  font-size: 20px;
+  text-align: center;
+  color: red;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 800px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  padding: 6px 15px;
+  border-radius: 20px;
+  position: relative;
+  max-width: 30%;
+  word-wrap: break-word;
+  font-size: 16px;
+}
+
+.sent {
+  background-color: #46bbff;
+  margin-left: auto;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #015ced;
+  align-self: flex-start;
+  color: #f9f9f9;
+}
+
+.senderName {
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+.sentName {
+  align-self: flex-end;
+  font-size: 12px;
+}
+
+.receivedName {
+  align-self: flex-start;
+  font-size: 12px;
+}
+
+.timestamp {
+  margin: 4px 0;
+  color: #888;
+}
+
+.sentTimestamp {
+  align-self: flex-end;
+  font-size: 9px;
+}
+
+.receivedTimestamp {
+  align-self: flex-start;
+  font-size: 9px;
+}
+
+.message strong {
+  margin-right: 8px;
+}
+
+.message small {
+  margin-left: 10px;
+  color: #888;
+}
+
+.messageform {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+}
+
+.messageform input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 25px;
+  margin-right: 10px;
+}
+
+.messageform button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.messageform button:hover {
+  background-color: #0056b3;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}

@@ -1,0 +1,366 @@
+/* Header chính */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: transparent;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* Container bên trái */
+.leftContainer {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+
+  border-radius: 50px;
+  /* Bo tròn */
+  background-color: transparent;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.searchResults {
+  position: fixed;
+  border-radius: 20px;
+  top: 60px;
+  right: 225px;
+  background: white;
+  border: 1px solid #ccc;
+  width: 300px;
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.doctorCard {
+  display: flex;
+  align-items: center; /* Căn giữa dọc */
+  gap: 10px; /* Khoảng cách giữa hình ảnh và thông tin */
+  padding: 10px;
+  font-size: 16px;
+}
+.doctorCard:hover {
+  display: flex;
+  align-items: center; /* Căn giữa dọc */
+  gap: 10px; /* Khoảng cách giữa hình ảnh và thông tin */
+  padding: 10px;
+  font-size: 16px;
+  background-color: #f0f0f0;
+}
+
+.doctorImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.doctorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header.scrolled {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container bên trái */
+.leftContainer {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+
+  border-radius: 50px;
+  /* Bo tròn */
+  background-color: transparent;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.logo {
+  height: 45px;
+  margin-right: 8px;
+}
+
+.siteName {
+  font-family: "Inika", serif;
+  font-size: 24px;
+}
+
+.soul {
+  color: #2f80ed;
+  font-weight: bold;
+}
+
+.care {
+  color: #196c17;
+  font-weight: bold;
+}
+
+/* Nav Icons */
+.navIcon {
+  margin-right: 8px;
+}
+
+/* Nav Links */
+.navLinks {
+  display: flex;
+  align-items: center;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: #ffffff;
+  /* Màu trắng ban đầu */
+  font-family: Inter, serif;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  /* Không viền */
+  border-radius: 20px;
+  /* Bo tròn nút */
+  margin: 0px 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Active và hover */
+.navLinks a.active {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.navLinks a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Khi scroll, đổi màu navLink */
+.header.scrolled .navLinks a {
+  color: #0f53e6;
+  /* Màu xanh khi scroll */
+}
+
+.header.scrolled .navLinks a.active {
+  background-color: #0f53e6;
+  color: #fff;
+}
+
+/* Hover khi scroll */
+.header.scrolled .navLinks a:hover {
+  background-color: #56adff;
+  color: #fff;
+}
+
+/* Container bên phải */
+.rightContainer {
+  display: flex;
+  align-items: center;
+}
+
+.loginButton {
+  padding: 8px 16px;
+  background-color: #3474ff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  /* Bo tròn nút */
+  cursor: pointer;
+  font-family: Inter, serif;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: #1a5bbf;
+}
+
+/* Thông tin người dùng */
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.welcomeMessage {
+  font-family: Roboto, serif;
+  font-size: 16px;
+  margin-right: 10px;
+  color: #fff;
+  /* Màu trắng */
+}
+
+.logoutIcon {
+  height: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: filter 0.3s;
+}
+
+.logoutIcon:hover {
+  filter: brightness(0.8);
+}
+
+/* Search */
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.searchButtonWrapper {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s;
+}
+
+.searchButtonWrapper:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px 12px;
+}
+.header.scrolled .searchButton {
+  color: #3474ff; /* Màu xanh */
+}
+
+.searchInput {
+  border: none;
+  background: none;
+  padding: 8px;
+  font-size: 16px;
+  outline: none;
+  color: #fff;
+}
+
+.header.scrolled .searchInput {
+  color: #3474ff;
+}
+.searchInput::placeholder {
+  color: #cbcbcb; /* Màu mặc định */
+  transition: color 0.3s ease; /* Hiệu ứng mượt */
+}
+
+.header.scrolled .searchInput::placeholder {
+  color: #8eb1fc; /* Màu xanh khi scroll */
+}
+
+.header.scrolled .searchButtonWrapper {
+  background-color: #f0f0f0;
+}
+
+.header.scrolled .userInfo {
+  color: #3474ff;
+}
+
+.header.scrolled .welcomeMessage {
+  color: #3474ff;
+}
+/* Dropdown Menu Styles */
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 65px; /* Điều chỉnh vị trí theo nhu cầu */
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Đảm bảo dropdown nằm trên các phần tử khác */
+  width: 300px; /* Chiều rộng của dropdown */
+  overflow-y: auto;
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Đường viền giữa header và options */
+}
+
+.avatar {
+  width: 40px; /* Kích thước avatar */
+  height: 40px;
+  border-radius: 50%; /* Avatar tròn */
+  border: 1px solid #f0f0f0;
+  margin-right: 10px; /* Khoảng cách giữa avatar và tên */
+}
+
+.userInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: bold; /* Đậm tên người dùng */
+}
+
+.userEmail {
+  font-size: 12px; /* Kích thước chữ nhỏ hơn cho email */
+  color: #888; /* Màu sắc nhạt cho email */
+}
+
+.dropdownOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dropdown Options Styles */
+.dropdownOptions button {
+  display: flex; /* Để sắp xếp biểu tượng và văn bản */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s; /* Hiệu ứng khi hover */
+}
+
+.optionIcon {
+  margin-right: 20px; /* Khoảng cách giữa biểu tượng và văn bản */
+  color: #3474ff; /* Màu sắc của biểu tượng */
+}
+
+/* Hiệu ứng hover cho các tùy chọn */
+.dropdownOptions button:hover {
+  background-color: #f0f0f0; /* Màu nền khi hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dropdown {
+    width: 200px; /* Chiều rộng nhỏ hơn trên màn hình nhỏ */
+  }
+}

@@ -1,13 +1,17 @@
 .mainContainer {
-  padding-top: -10px;
-  margin-left: 250px;
+  margin-top: 45px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 16px;
+  width: 100%;
+  height: 800px;
+  overflow: auto;
 }
 .buttonContainer {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  margin: 10px 0;
+  font-family: "Roboto", serif;
   font-size: 16px;
 }
 .buttonContainer button {
@@ -20,7 +24,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   justify-content: center;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", serif;
   font-size: 16px;
 }
 
@@ -31,9 +35,10 @@
 .weekView {
   display: flex;
   flex-direction: column;
-  margin: 20px;
-  font-size: 16px;
-  background-image: url("/content/logo/hand-painted-watercolor-pastel-sky-cloud-background_41066-1919.jpg");
+  margin: 10px;
+  font-size: 14px;
+  /* background-image: url("/content/panel/41183d44ebd4c5b4500ec65a9ade4d3f.gif"); */
+  background-color: #d1def8;
   background-size: cover;
   background-position: center;
 }
@@ -41,7 +46,7 @@
 .weekNavigation {
   display: flex;
   align-items: center;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", serif;
   justify-content: space-between;
   margin-bottom: 20px;
   margin-left: 10px;
@@ -49,7 +54,7 @@
 }
 
 .weekNavigation button {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", serif;
   font-size: 16px;
   color: #ffff;
   background-color: #8dbbfa;
@@ -81,7 +86,7 @@
 }
 
 .timeHeader {
-  width: 120px;
+  width: 100px;
   border: 1px solid #ccc;
   height: 120px;
   position: relative;
@@ -98,7 +103,7 @@
   font-size: 16px;
 }
 .dateText {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", serif;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -109,7 +114,7 @@
 }
 
 .timeText {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", serif;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -122,12 +127,13 @@
 .dayHeader {
   flex: 1;
   text-align: center;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", serif;
+  color: #fff;
   font-size: 16px;
   padding: 5px 0;
   border: 1px solid #ccc;
-  background-color: #8dbbfa;
-  height: 50px;
+  background-color: #1e40af;
+  height: 60px;
 }
 
 .dayHeader div {
@@ -147,12 +153,12 @@
 .timeLabel {
   width: 100px;
   text-align: center;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", serif;
   font-size: 16px;
   color: #fff;
   padding: 10px;
   border: 1px solid #ccc;
-  background-color: rgb(47, 57, 164);
+  background-color: #172554;
 }
 
 .timeSlotWrapper {
@@ -170,7 +176,7 @@
 }
 
 .hasAppointment {
-  background-color: #c82b2b;
+  background-color: #3474ff;
   color: white;
 }
 

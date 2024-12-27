@@ -1,11 +1,13 @@
+"use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Layout from "../components/layout";
+import Layout from "../components/layout_nofooter";
 import Cookies from "js-cookie";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ErrorMessage from "../components/ui/ErrorMessage";
 import Notification from "../components/ui/Notification";
+import Menu from "@/components/menu";
 
 interface AvailableSlot {
   _id: string;
@@ -82,7 +84,7 @@ const Booking = () => {
     try {
       setNotificationType("loading");
       setNotification(
-        "Please do not exit the page, your request is being processed."
+        "Vui lòng không thoát khỏi trang. Yêu cầu của bạn đang được xử lý"
       );
 
       const token = Cookies.get("token");
@@ -115,14 +117,14 @@ const Booking = () => {
       );
       setNotificationType("success");
       setNotification(
-        "Thank you for your appointment. Please check your email for confirmation."
+        "Cảm ơn vì đã đặt lịch trên trang web của chúng tôi. Vui lòng kiểm tra thông báo chi tiết trong mail!"
       );
       setTimeout(() => {}, 3000);
     } catch (error) {
       console.error("Error booking appointment:", error);
       setNotificationType("error");
       setNotification(
-        "The selected time slot is not available. Please choose another time."
+        "Thời gian đặt lịch không khả dụng. Vui lòng chọn khung giờ khác."
       );
     }
   };
@@ -138,63 +140,174 @@ const Booking = () => {
     return <ErrorMessage message={error} onClose={() => setError(null)} />;
 
   return (
-    <Layout>
-      <div className="booking-container">
-        {notification && notificationType && (
-          <Notification
-            message={notification}
-            type={notificationType}
-            onClose={() => setNotification(null)}
-          />
-        )}
-        {doctor && (
-          <div className="cards-container">
-            <div className="card doctor-info">
+    <div
+      style={{
+        padding: "0px 3%",
+        fontFamily: '"Roboto", serif',
+        fontSize: "16px",
+        //backgroundColor: "#000",
+        backgroundSize: "cover",
+        justifyContent: "center",
+        marginTop: "20px",
+      }}
+    >
+      {notification && notificationType && (
+        <Notification
+          message={notification}
+          type={notificationType}
+          onClose={() => setNotification(null)}
+        />
+      )}
+      {doctor && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "row",
+            maxWidth: "1000px",
+            margin: "0 auto",
+            gap: "8px",
+            overflowY: "auto",
+          }}
+        >
+          <div
+            className="left-column"
+            style={{
+              flex: "1",
+              fontSize: "16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              backgroundColor: "#f9f9f9",
+              padding: "20px",
+              borderRadius: "15px",
+              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+              overflowY: "auto",
+            }}
+          >
+            <div
+              style={{
+                height: "89%",
+                padding: "20px",
+                borderRadius: "15px",
+                backgroundColor: "#fff",
+                boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                overflowY: "auto",
+              }}
+            >
               <img
                 src={doctor.imageURL || `/content/logo/doctor.png`}
                 alt={doctor.name}
-                className="profile-img"
+                style={{
+                  borderRadius: "50%",
+                  border: "1px solid #ccc",
+                  width: "100px",
+                  height: "100px",
+                  objectFit: "cover",
+                  marginBottom: "10px",
+                }}
               />
-              <div className="info">
-                <h2>Dr. {doctor.name}</h2>
+              <div>
+                <h2
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: 500,
+                    color: "#404178",
+                  }}
+                >
+                  Dr. {doctor.name}
+                </h2>
                 <p>
-                  <strong>Specialization:</strong> {doctor.specialization}
+                  <strong>Chuyên ngành:</strong> {doctor.specialization}
                 </p>
                 <p>
-                  <strong>Experience:</strong> {doctor.experience} years
+                  <strong>Kinh nghiệm:</strong> {doctor.experience} năm
                 </p>
                 <p>
-                  <strong>Clinic Address:</strong> {doctor.clinicAddress}
+                  <strong>Địa chỉ phòng khám:</strong> {doctor.clinicAddress}
                 </p>
                 <p>
-                  <strong>Phone Number:</strong> {doctor.phoneNumber}
+                  <strong>Số điện thoại:</strong> {doctor.phoneNumber}
                 </p>
                 <p>
                   <strong>Email:</strong> {doctor.email}
                 </p>
                 <p>
-                  <strong>Life Motto:</strong> {doctor.lifeMotto}
+                  <strong>Châm ngôn sống:</strong> {doctor.lifeMotto}
                 </p>
               </div>
             </div>
-            <div className="card booking-form">
-              <h2>Book Now</h2>
-              <label htmlFor="date">Select Date:</label>
+          </div>
+          <div
+            className="right-column"
+            style={{
+              flex: "1",
+              fontSize: "14px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              backgroundColor: "#f9f9f9",
+              padding: "20px",
+              borderRadius: "15px",
+              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <div
+              className="card booking-form"
+              style={{
+                padding: "20px",
+                borderRadius: "15px",
+                backgroundColor: "#fff",
+                boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 500,
+                  color: "#404178",
+                  marginBottom: "20px",
+                }}
+              >
+                Đặt Lịch
+              </h2>
+
+              <label htmlFor="date" style={{ fontWeight: "600" }}>
+                Chọn ngày:
+              </label>
               <input
                 type="date"
                 id="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
+                style={{
+                  padding: "10px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                  marginBottom: "20px",
+                  width: "100%",
+                }}
               />
-              <label htmlFor="slot">Select Time Slot:</label>
+
+              <label htmlFor="slot" style={{ fontWeight: "600" }}>
+                Chọn khung giờ:
+              </label>
               <select
                 id="slot"
                 value={selectedSlot}
                 onChange={(e) => setSelectedSlot(e.target.value)}
+                style={{
+                  padding: "10px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                  marginBottom: "20px",
+                  width: "100%",
+                  backgroundColor: "#fff",
+                }}
               >
-                <option value="">Select a time slot</option>
+                <option value="">Chọn khung giờ</option>
                 {filteredSlots.length === 0 && selectedDate && (
-                  <option value="">No available slots for this date</option>
+                  <option value="">Không còn chỗ trống cho ngày này</option>
                 )}
                 {filteredSlots.map((slot) => (
                   <option key={slot._id} value={slot.startTime}>
@@ -202,135 +315,56 @@ const Booking = () => {
                   </option>
                 ))}
               </select>
-              <label htmlFor="appointmentType">Appointment Type:</label>
+
+              <label htmlFor="appointmentType" style={{ fontWeight: "600" }}>
+                Loại cuộc hẹn:
+              </label>
               <select
                 id="appointmentType"
                 value={appointmentType}
                 onChange={(e) => setAppointmentType(e.target.value)}
+                style={{
+                  padding: "10px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                  marginBottom: "20px",
+                  width: "100%",
+                  backgroundColor: "#fff",
+                }}
               >
-                <option value="In-Person">In-Person</option>
-                <option value="Video Call">Video Call</option>
+                <option value="In-Person">Gặp mặt trực tiếp</option>
+                <option value="Video Call">Cuộc gọi Video</option>
               </select>
-              <div className="button-container">
-                <button onClick={handleBookAppointment}>
-                  Book Appointment
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <button
+                  className="inline-flex h-10 cursor-pointer items-center justify-center rounded bg-[#004574] px-6 py-2 text-white"
+                  onClick={handleBookAppointment}
+                  style={{
+                    fontSize: "16px",
+                    borderRadius: "5px",
+                    border: "none",
+                    backgroundColor: "#004574",
+                    color: "#fff",
+                    padding: "12px 20px",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease",
+                  }}
+                >
+                  Đặt Lịch
                 </button>
               </div>
             </div>
           </div>
-        )}
-        <style jsx>{`
-          .booking-container {
-            padding: 100px;
-            font-family: Georgia, "Times New Roman", Times, serif;
-            font-size: 18px;
-            background-color: #004574;
-            background-size: cover;
-            justify-content: center;
-            margin-top: 30px;
-            width: calc(100% - 150px);
-          }
-
-          .cards-container {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1000px;
-            margin: 0 auto;
-            gap: 20px;
-            background-color: #004574;
-          }
-
-          .card {
-            flex: 1;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
-            background-color: #ffff;
-          }
-
-          .doctor-info {
-            display: flex;
-            align-items: flex-start;
-            font-size: 16px;
-          }
-
-          .profile-img {
-            border-radius: 50%;
-            width: 90px;
-            height: 90px;
-            margin-right: 20px;
-            object-fit: cover;
-          }
-
-          .info {
-            flex: 1;
-          }
-
-          .info h2 {
-            color: #004574;
-            font-size: 18px;
-            margin-bottom: 10px;
-          }
-
-          .info p {
-            margin: 5px 0;
-            line-height: 1.4;
-          }
-
-          .booking-form {
-            display: flex;
-            flex-direction: column;
-          }
-
-          .booking-form h2 {
-            color: #004574;
-            font-size: 16px;
-            margin-bottom: 10px;
-          }
-
-          .booking-form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-          }
-
-          .booking-form select,
-          .booking-form input {
-            display: block;
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            box-sizing: border-box;
-            font-family: Georgia, "Times New Roman", Times, serif;
-          }
-
-          .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-          }
-
-          .booking-form button {
-            padding: 10px 20px;
-            background-color: #004574;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: Georgia, "Times New Roman", Times, serif;
-          }
-
-          .booking-form button:hover {
-            background-color: #005bb5;
-          }
-          .card booking-form {
-            font-size: 16px;
-          }
-        `}</style>
-      </div>
-    </Layout>
+        </div>
+      )}
+    </div>
   );
 };
 

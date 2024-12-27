@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000", // Thay đổi URL thành địa chỉ API của bạn
+  baseURL: "http://localhost:3000",
   timeout: 10000,
 });
 api.interceptors.request.use(

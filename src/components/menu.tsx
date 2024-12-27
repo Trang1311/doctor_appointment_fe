@@ -65,7 +65,7 @@ const Menu: React.FC = () => {
           align-items: center;
           padding: 15px;
           cursor: pointer;
-          font-family: Georgia, "Times New Roman", Times, serif;
+          font-family: Roboto, serif;
           font-size: 16px;
           color: #464141;
           line-height: 2;

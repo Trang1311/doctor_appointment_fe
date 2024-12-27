@@ -9,6 +9,7 @@ import {
   FaClock,
   FaHome,
 } from "react-icons/fa";
+import Footer from "./footer";
 
 const DashboardData: React.FC = () => {
   const [role, setRole] = useState<string | null>(null);
@@ -29,7 +30,8 @@ const DashboardData: React.FC = () => {
       (item) =>
         currentPath.includes(item.link) ||
         (item.link.includes("appointments") &&
-          currentPath.includes("appointments"))
+          currentPath.includes("appointments")) ||
+        (item.label === "Chat room" && currentPath.includes("/chat"))
     );
     setSelectedItem(currentMenuItem?.label || null);
   }, [router]);
@@ -37,29 +39,29 @@ const DashboardData: React.FC = () => {
   const menuItems =
     role === "guest"
       ? [
-          { label: "Dashboard", icon: <FaHome />, link: "/dashboard" },
-          { label: "Profile", icon: <FaUser />, link: `/profile?id=${userId}` },
+          { label: "Tổng Quan", icon: <FaHome />, link: "/dashboard" },
+          { label: "Hồ Sơ", icon: <FaUser />, link: `/profile?id=${userId}` },
           {
-            label: "Calendar",
+            label: "Lịch Khám",
             icon: <FaCalendarAlt />,
             link: `/appointments?id=${userId}`,
           },
-          { label: "Chat room", icon: <FaComments />, link: "/chat" },
+          { label: "Trò Chuyện", icon: <FaComments />, link: "/chat" },
         ]
       : [
-          { label: "Dashboard", icon: <FaHome />, link: "/dashboard" },
-          { label: "Profile", icon: <FaUser />, link: `/profile?id=${userId}` },
+          { label: "Tổng Quan", icon: <FaHome />, link: "/dashboard" },
+          { label: "Hồ Sơ", icon: <FaUser />, link: `/profile?id=${userId}` },
           {
-            label: "Schedule",
+            label: "Thời Gian Biểu",
             icon: <FaClock />,
             link: "/schedule",
           },
           {
-            label: "Calendar",
+            label: "Lịch Hẹn",
             icon: <FaCalendarAlt />,
             link: "/appointments",
           },
-          { label: "Chat room", icon: <FaComments />, link: "/chat" },
+          { label: "Trò Chuyện", icon: <FaComments />, link: "/chat" },
         ];
 
   const handleItemClick = (item: { label: string; link: string }) => {
@@ -68,8 +70,27 @@ const DashboardData: React.FC = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <div className="drawer">
+    <div
+      className="dashboard-container"
+      style={{
+        display: "flex",
+        margin: 0,
+        fontFamily: "Roboto, serif",
+        color: "#fff",
+        position: "fixed",
+        top: "75px",
+        height: "635px",
+      }}
+    >
+      <div
+        className="drawer"
+        style={{
+          width: "240px",
+          backgroundColor: "#1D1E4B",
+          padding: "20px",
+          fontSize: "18px",
+        }}
+      >
         <ul>
           {menuItems.map((item) => (
             <li
@@ -89,21 +110,8 @@ const DashboardData: React.FC = () => {
           </div>
         )}
       </div>
+
       <style jsx>{`
-        .dashboard-container {
-          display: flex;
-          margin: 0;
-          font-family: Georgia, "Times New Roman", Times, serif;
-          position: fixed;
-          top: 85px;
-        }
-        .drawer {
-          width: 200px;
-          background-color: #fff;
-          padding: 20px;
-          height: 100vh;
-          font-size: 18px;
-        }
         .drawer ul {
           list-style: none;
           padding: 0;
@@ -115,17 +123,26 @@ const DashboardData: React.FC = () => {
           cursor: pointer;
         }
         .drawer li:hover {
-          background-color: #8dbbfa;
+          font-weight: bold;
+          color: white;
+          box-sizing: border-box;
+          box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.15);
+          border: 2px solid #fff;
+          boder-radius: 10px;
         }
         .drawer li.active {
           font-weight: bold;
-          background-color: #8dbbfa;
+          color: white;
+          box-sizing: border-box;
+          box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.15);
+          border: 2px solid #fff;
+          boder-radius: 10px;
         }
         .drawer li span {
           margin-left: 10px;
         }
         .content {
-          flex: 1;
+          flex-grow: 1;
           align-items: center;
           padding: 20px;
           margin: 0;

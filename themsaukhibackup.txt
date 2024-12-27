@@ -1,0 +1,268 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faCompass,
+  faInfoCircle,
+  faSpa,
+} from "@fortawesome/free-solid-svg-icons";
+import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
+import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsActiveRounded";
+import { useTheme } from "next-themes";
+import styles from "../styles/headerscroll.module.css";
+import Image from "next/image";
+
+const Header: React.FC = () => {
+  const router = useRouter();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [username, setUsername] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedUsername = Cookies.get("username");
+    setUsername(storedUsername || null);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleLoginClick = () => {
+    router.push("/login");
+  };
+
+  const handleLogoutClick = () => {
+    Cookies.remove("token");
+    Cookies.remove("username");
+    setUsername(null);
+    router.push("/");
+  };
+
+  const handleDashboardClick = () => {
+    const userRole = Cookies.get("role");
+    router.push(`/dashboard?role=${userRole}`);
+  };
+
+  return (
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
+  <div className={styles.leftContainer}>
+    <div className={styles.logoContainer}>
+      <img src="/content/logo/lotus.png" alt="Logo" className={styles.logo} />
+      <span className={styles.siteName}>
+        <span className={styles.soul}>Soul</span>
+        <span className={styles.care}>Care</span>
+      </span>
+    </div>
+    <nav className={styles.navLinks}>
+      <Link href="/" legacyBehavior>
+        <a className={router.pathname === "/" ? styles.active : ""}>
+          <FontAwesomeIcon icon={faHome} className={styles.navIcon} />
+          Trang chủ
+        </a>
+      </Link>
+      <Link href="/explore" legacyBehavior>
+        <a className={router.pathname === "/explore" ? styles.active : ""}>
+          <FontAwesomeIcon icon={faCompass} className={styles.navIcon} />
+          Khám phá
+        </a>
+      </Link>
+      <Link href="/about" legacyBehavior>
+        <a className={router.pathname === "/about" ? styles.active : ""}>
+          <FontAwesomeIcon icon={faInfoCircle} className={styles.navIcon} />
+          Về chúng tôi
+        </a>
+      </Link>
+      <Link href="/harmony-zone" legacyBehavior>
+        <a className={router.pathname === "/harmony-zone" ? styles.active : ""}>
+          <FontAwesomeIcon icon={faSpa} className={styles.navIcon} />
+          Harmony Zone
+        </a>
+      </Link>
+    </nav>
+  </div>
+  <div className={styles.rightContainer}>
+    {username ? (
+      <div className={styles.userInfo}>
+        <span className={styles.welcomeMessage}>Xin chào, {username}</span>
+        <img
+          src="content/logo/user-logout.png"
+          alt="Logout"
+          className={styles.logoutIcon}
+          onClick={handleLogoutClick}
+        />
+      </div>
+    ) : (
+      <button className={styles.loginButton} onClick={handleLoginClick}>
+        Đăng Nhập
+      </button>
+    )}
+  </div>
+</header>
+
+  );
+};
+
+export default Header;
+
+
+
+//////////////////////////////////////////
+
+
+
+/* Header chính */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: transparent;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container bên trái */
+.leftContainer {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border: 2px solid #2f80ed; /* Xanh */
+  border-radius: 50px; /* Bo tròn */
+  background-color: transparent;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 8px;
+}
+
+.siteName {
+  font-family: "Inika", serif;
+  font-size: 24px;
+}
+
+.soul {
+  color: #2f80ed;
+  font-weight: bold;
+}
+
+.care {
+  color: #196c17;
+  font-weight: bold;
+}
+
+/* Nav Links */
+.navLinks {
+  display: flex;
+  align-items: center;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: #fff; /* Màu trắng ban đầu */
+  font-family: Inter, serif;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none; /* Không viền */
+  border-radius: 20px; /* Bo tròn nút */
+  margin: 0 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Active và hover */
+.navLinks a.active {
+  background-color: #2f80ed;
+  color: #fff;
+  border: 2px solid #2f80ed;
+}
+
+.navLinks a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Khi scroll, đổi màu navLink */
+.header.scrolled .navLinks a {
+  color: #2f80ed; /* Màu xanh khi scroll */
+}
+
+.header.scrolled .navLinks a.active {
+  background-color: #2f80ed;
+  color: #fff;
+}
+
+/* Container bên phải */
+.rightContainer {
+  display: flex;
+  align-items: center;
+}
+
+.loginButton {
+  padding: 8px 16px;
+  background-color: #2f80ed;
+  color: #fff;
+  border: none;
+  border-radius: 20px; /* Bo tròn nút */
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: #1a5bbf;
+}
+
+/* Thông tin người dùng */
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.welcomeMessage {
+  font-family: Roboto, serif;
+  font-size: 16px;
+  margin-right: 10px;
+  color: #fff; /* Màu trắng */
+}
+
+.logoutIcon {
+  height: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: filter 0.3s;
+}
+
+.logoutIcon:hover {
+  filter: brightness(0.8);
+}

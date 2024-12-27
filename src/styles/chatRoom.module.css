@@ -1,0 +1,146 @@
+.chatRoomContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  width: 455px;
+  height: 700px;
+  margin: 0 auto;
+  padding: 15px;
+  padding-top: 60px; /* Tạo khoảng cách cho nút "Thêm" */
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: #fff;
+  font-family: "Roboto", serif;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 15px; /* Điều chỉnh vị trí nút nếu cần */
+  right: 15px;
+  background-color: #015ced;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  z-index: 1; /* Đảm bảo nút "Thêm" luôn ở trên */
+}
+
+.addButton:hover {
+  background-color: #0045b5;
+}
+
+.addButton span {
+  margin-right: 8px;
+}
+
+.chatRoomBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Đưa nội dung về phía trái */
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 6px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: #000;
+  font-weight: bold;
+}
+
+.chatRoomBox img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chatRoomBox:hover {
+  background-color: #f0f0f0;
+}
+.chatRoomBox.active {
+  background-color: #d6e4ff; /* Highlight phòng đang chọn */
+  border-left: 4px solid #015ced; /* Đường viền nổi bật */
+}
+
+.noChatRooms {
+  font-size: 18px;
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.searchBox {
+  margin-top: 0px;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+}
+
+.searchResults {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  position: absolute;
+  z-index: 1;
+}
+
+.searchResultItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.searchResultItem img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.searchResultItem:hover {
+  background-color: #f0f0f0;
+}
+
+.userInfoContainer {
+  display: flex; /* Sắp xếp các phần tử theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 0px;
+  border-radius: 8px;
+}
+
+.userInfoContainer img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-right: 10px; /* Tạo khoảng cách giữa avatar và username */
+}
+
+.userInfoContainer span {
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+}
